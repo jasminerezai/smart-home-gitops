@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import android.util.Log
 
 class SmartHomeViewModel : ViewModel() {
 
@@ -43,6 +44,7 @@ class SmartHomeViewModel : ViewModel() {
 
         try {
             val pullRequests = repository.getOpenPullRequests(token)
+            Log.d("GitHubPolling", "Open pull requests: ${pullRequests.size}")
 
             for (pullRequest in pullRequests) {
                 val comments = repository.getIssueComments(
