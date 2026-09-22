@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import android.util.Log
+import kotlinx.coroutines.withContext
 
 class SmartHomeViewModel : ViewModel() {
 
@@ -53,8 +54,9 @@ class SmartHomeViewModel : ViewModel() {
                 )
 
                 for (comment in comments) {
-                    val score = detector.analyze(comment.body)
-
+                    val score = withContext(Dispatchers.Default) {
+                        detector.analyze(comment.body)
+                    }
                     if (score > 0) {
                         _uiState.value = SmartHomeUiState(
                             isSecurityAlert = true,
