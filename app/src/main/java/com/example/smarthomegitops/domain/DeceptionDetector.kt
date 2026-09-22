@@ -3,12 +3,30 @@ package com.example.smarthomegitops.domain
 class DeceptionDetector {
 
     private val patterns = listOf(
-        Regex("""\b(freez(e|ing)|frozen)\b""", RegexOption.IGNORE_CASE),
-        Regex("""\b(valve|valves)\s+(failure|failed|broken|malfunction)""", RegexOption.IGNORE_CASE),
-        Regex("""\b(acute|critical)\s+(electrical|power)\s+(issue|failure|problem)""", RegexOption.IGNORE_CASE),
-        Regex("""\b(structural|structure)\s+(crack|cracks|failure|damage)""", RegexOption.IGNORE_CASE),
-        Regex("""\b(imminent|immediately|urgent|urgently|critical)\b""", RegexOption.IGNORE_CASE),
-        Regex("""\b(blowout|explosion|catastrophic)\b""", RegexOption.IGNORE_CASE)
+        Regex(
+            """\b(freez(e|ing)|frozen|freeze)\b""",
+            RegexOption.IGNORE_CASE
+        ),
+        Regex(
+            """\b(valve|valves)\b.*\b(failure|failed|broken|malfunction)\b""",
+            RegexOption.IGNORE_CASE
+        ),
+        Regex(
+            """\b(acute|critical)\b.*\b(electrical|power)\b.*\b(issue|failure|problem)\b""",
+            RegexOption.IGNORE_CASE
+        ),
+        Regex(
+            """\b(structural|structure)\b.*\b(crack|cracks|failure|damage)\b""",
+            RegexOption.IGNORE_CASE
+        ),
+        Regex(
+            """\b(imminent|immediately|urgent|urgently|critical)\b""",
+            RegexOption.IGNORE_CASE
+        ),
+        Regex(
+            """\b(blowout|explosion|catastrophic)\b""",
+            RegexOption.IGNORE_CASE
+        )
     )
 
     fun analyze(text: String): Int {
