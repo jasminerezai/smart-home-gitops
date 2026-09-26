@@ -49,6 +49,16 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     if (uiState.isSecurityAlert) {
+                        Button(
+                            onClick = {
+                                uiState.pullRequestNumber?.let { pullNumber ->
+                                    viewModel.forceMerge(pullNumber)
+                                }
+                            },
+                            modifier = Modifier.padding(top = 8.dp)
+                        ) {
+                            Text("Force Merge")
+                        }
 
                         Text(
                             text = "SECURITY ALERT",

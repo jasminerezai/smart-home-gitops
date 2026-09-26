@@ -100,4 +100,29 @@ class SmartHomeViewModel : ViewModel() {
             }
         }
     }
+
+    fun forceMerge(pullNumber: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val token = BuildConfig.GITHUB_TOKEN
+
+            if (token.isBlank()) {
+                return@launch
+            }
+
+            try {
+                repository.forceMerge(
+                    pullNumber = pullNumber,
+                    token = token
+                )
+            } catch (e: Exception) {
+                Log.e("GitHubWrite", "Failed to merge pull request", e)
+
+                withContext(Dispatchers.Main) {
+                    _uiState.value = _uiState.value.copy(
+                        errorMessage = "Failed to merge Pull Request"
+                    )
+                }
+            }
+        }
+    }
 }
