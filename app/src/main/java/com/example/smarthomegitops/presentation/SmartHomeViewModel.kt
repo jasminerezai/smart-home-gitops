@@ -89,6 +89,9 @@ class SmartHomeViewModel : ViewModel() {
                     pullNumber = pullNumber,
                     token = token
                 )
+
+                _uiState.value = SmartHomeUiState()
+
             } catch (e: Exception) {
                 Log.e("GitHubWrite", "Failed to reject pull request", e)
 
@@ -114,6 +117,9 @@ class SmartHomeViewModel : ViewModel() {
                     pullNumber = pullNumber,
                     token = token
                 )
+
+                _uiState.value = SmartHomeUiState()
+
             } catch (e: Exception) {
                 Log.e("GitHubWrite", "Failed to merge pull request", e)
 
