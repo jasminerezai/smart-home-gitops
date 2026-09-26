@@ -41,5 +41,5 @@ interface GitHubApi {
     suspend fun updateHouseConfig(
         @Header("Authorization") token: String,
         @Body request: UpdateFileRequest
-    ): GitHubFileResponse
+    )
 }
