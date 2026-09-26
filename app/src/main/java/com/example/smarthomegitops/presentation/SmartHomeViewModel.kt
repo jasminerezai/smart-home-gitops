@@ -61,7 +61,8 @@ class SmartHomeViewModel : ViewModel() {
                         _uiState.value = SmartHomeUiState(
                             isSecurityAlert = true,
                             confidenceScore = score,
-                            attackText = comment.body
+                            attackText = comment.body,
+                            pullRequest.number
                         )
                         return
                     }

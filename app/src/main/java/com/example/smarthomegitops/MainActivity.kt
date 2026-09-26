@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.smarthomegitops.presentation.SmartHomeViewModel
 import com.example.smarthomegitops.ui.theme.SmartHomeGitOpsTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.Button
 
 class MainActivity : ComponentActivity() {
 
@@ -64,6 +65,17 @@ class MainActivity : ComponentActivity() {
                             color = Color.White,
                             modifier = Modifier.padding(top = 16.dp)
                         )
+
+                        Button(
+                            onClick = {
+                                uiState.pullRequestNumber?.let { pullNumber ->
+                                    viewModel.forceReject(pullNumber)
+                                }
+                            },
+                            modifier = Modifier.padding(top = 16.dp)
+                        ) {
+                            Text("Force Reject")
+                        }
 
                     } else {
 
