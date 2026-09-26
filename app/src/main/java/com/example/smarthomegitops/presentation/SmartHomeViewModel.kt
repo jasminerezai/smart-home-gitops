@@ -74,4 +74,29 @@ class SmartHomeViewModel : ViewModel() {
             // Ignore temporary network/API errors.
         }
     }
+
+    fun forceReject(pullNumber: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val token = BuildConfig.GITHUB_TOKEN
+
+            if (token.isBlank()) {
+                return@launch
+            }
+
+            try {
+                repository.closePullRequest(
+                    pullNumber = pullNumber,
+                    token = token
+                )
+            } catch (e: Exception) {
+                Log.e("GitHubWrite", "Failed to reject pull request", e)
+
+                withContext(Dispatchers.Main) {
+                    _uiState.value = _uiState.value.copy(
+                        errorMessage = "Failed to close Pull Request"
+                    )
+                }
+            }
+        }
+    }
 }
